@@ -1,6 +1,9 @@
 #include <stdio.h> 
 #include <time.h>
 #include <math.h> 
+#include <string.h>
+#include <stdlib.h>
+#include "rsa.h"
 
 void temp_disp(uint64_t x[], uint32_t n);
 
@@ -33,18 +36,21 @@ int main()
 	//encryption
 	start_enc = clock();
 	for(i=0;i<10;i++)
-	    rsa1024(z,x,e,data);
+	    rsa1024(z,x,e,(uint64_t*)msg);
 	stop_enc = clock();
+	printf("Encrypted data: %s\n", z);
 	//decryption
     start_dec = clock();
     for(i=0;i<10;i++)
-        rsa1024(z,x,y,data);
+        rsa1024(z,x,y,(uint64_t*)msg);
     stop_dec = clock();
 	//temp_disp(z,18);
     us_enc = (stop_enc - start_enc)/10 ;
     us_dec = (stop_dec - start_dec)/10 ;
 	printf("Avg time taken for 1024 bit rsa encryption is %ld ms\n",us_enc/1000);
 	printf("Avg time taken for 1024 bit rsa decryption is %ld ms\n",us_dec/1000);
+	printf("Decrypted data: %s\n", (char*)z);
+
 
 	return 0;
 }

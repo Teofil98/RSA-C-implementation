@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include "rsa.h"
-
+#include "big_int.h"
 
 bool rsa1024(uint64_t res[], uint64_t data[], uint64_t expo[],uint64_t key[])
 {
